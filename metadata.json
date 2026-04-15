@@ -1,0 +1,8 @@
+{
+  "name": "Remix: InventoryFlow",
+  "description": "A professional barcode scanning inventory management system powered by Supabase.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": []
+}

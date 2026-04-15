@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --bg: #F1F5F9;
+  --surface: #FFFFFF;
+  --primary: #4F46E5;
+  --primary-dark: #3730A3;
+  --border: #E2E8F0;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --success: #10B981;
+  --accent: #F59E0B;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html, body {
+  overflow-y: auto;
+}
+
+body.light {
+  background-color: #F1F5F9;
+  color: #1E293B;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Dark Mode Overrides for hardcoded Tailwind colors */
+body.dark .bg-\[\#F1F5F9\] { background-color: #121212 !important; }
+body.dark .bg-white { background-color: #1e1e1e !important; }
+body.dark .bg-\[\#F8FAFC\] { background-color: #1a1a1a !important; }
+body.dark .text-\[\#1E293B\] { color: #f3f4f6 !important; }
+body.dark .text-\[\#64748B\] { color: #9ca3af !important; }
+body.dark .border-\[\#E2E8F0\] { border-color: #333333 !important; }
+body.dark .hover\:bg-gray-50:hover { background-color: #2d3748 !important; }
+body.dark .hover\:bg-\[\#E2E8F0\]:hover { background-color: #333333 !important; }
+body.dark .bg-\[\#ECFDF5\] { background-color: rgba(16, 185, 129, 0.1) !important; }
+body.dark .text-\[\#065F46\] { color: #34d399 !important; }
+body.dark .text-\[\#065F46\]\/80 { color: rgba(52, 211, 153, 0.8) !important; }
+body.dark .bg-\[\#EEF2FF\] { background-color: rgba(79, 70, 229, 0.15) !important; }
+body.dark .bg-red-50 { background-color: rgba(239, 68, 68, 0.1) !important; }
+body.dark .bg-red-100 { background-color: rgba(239, 68, 68, 0.2) !important; }
+body.dark .text-red-600 { color: #f87171 !important; }
+
+.theme-container {
+  background: inherit;
+  color: inherit;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* html5-qrcode overrides to match theme */
+#reader {
+  border: none !important;
+}
+
+#reader__status_span {
+  display: none !important;
+}
+
+#reader__scan_region {
+  background: #000 !important;
+}
+
+#reader video {
+  object-fit: cover !important;
+}
+
+#reader__dashboard_section_csr button {
+  background: var(--primary) !important;
+  color: white !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  margin: 4px !important;
+}
+
+#reader__dashboard_section_csr button:hover {
+  background: var(--primary-dark) !important;
+}
