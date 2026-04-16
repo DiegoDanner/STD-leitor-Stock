@@ -1,4 +1,4 @@
-import { Package, Terminal, Moon, Sun } from 'lucide-react';
+import { Barcode, Terminal, Moon, Sun } from 'lucide-react';
 
 export default function Header({ 
   isConnected, 
@@ -17,9 +17,9 @@ export default function Header({
     <header className="h-16 bg-white border-b border-[#E2E8F0] flex items-center justify-between px-6 flex-shrink-0 theme-container">
       <div className="flex items-center gap-2.5 font-bold text-xl text-[#4F46E5]">
         <div className="w-8 h-8 bg-[#4F46E5] rounded-md flex items-center justify-center text-white">
-          <Package size={20} />
+          <Barcode size={20} />
         </div>
-        InventoryFlow
+        Leitor de BarCode
       </div>
       
       <div className="flex items-center gap-4">

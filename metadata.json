@@ -1,5 +1,5 @@
 {
-  "name": "Remix: InventoryFlow",
+  "name": "Leitor de BarCode",
   "description": "A professional barcode scanning inventory management system powered by Supabase.",
   "requestFramePermissions": [
     "camera"
