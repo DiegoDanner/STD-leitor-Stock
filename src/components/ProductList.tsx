@@ -1,8 +1,8 @@
 import { Product } from '@/src/types';
 import { cn } from '@/src/lib/utils';
 import { formatDistanceToNow } from 'date-fns';
-import { Download, Search, Trash2, Edit2, Check, X, AlertTriangle } from 'lucide-react';
-import { useState } from 'react';
+import { Download, Search, Trash2, Edit2, Check, X, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 
 interface ProductListProps {
@@ -15,6 +15,9 @@ interface ProductListProps {
 
 export default function ProductList({ products, lastScannedId, onUpdate, onDelete, onDeleteAll }: ProductListProps) {
   const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 50;
+
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
@@ -24,6 +27,16 @@ export default function ProductList({ products, lastScannedId, onUpdate, onDelet
     p.name.toLowerCase().includes(search.toLowerCase()) || 
     p.barcode.includes(search)
   );
+
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+  const displayedProducts = filteredProducts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const handleExport = () => {
     // Sheet 1: Inventory
@@ -153,14 +166,14 @@ export default function ProductList({ products, lastScannedId, onUpdate, onDelet
               </tr>
             </thead>
             <tbody>
-              {filteredProducts.length === 0 ? (
+              {displayedProducts.length === 0 ? (
                 <tr>
                   <td colSpan={4} className="px-4 py-10 text-center text-[#64748B] italic">
                     No products found. Start scanning to add items.
                   </td>
                 </tr>
               ) : (
-                filteredProducts.map((product) => (
+                displayedProducts.map((product) => (
                   <tr 
                     key={product.id}
                     className={cn(
@@ -241,6 +254,30 @@ export default function ProductList({ products, lastScannedId, onUpdate, onDelet
           </table>
         </div>
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between px-4 py-4 bg-white border-t border-[#E2E8F0] rounded-b-xl">
+          <div className="text-sm text-[#64748B]">
+            Página <span className="font-bold text-[#1E293B]">{currentPage}</span> de <span className="font-bold text-[#1E293B]">{totalPages}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="p-2 border border-[#E2E8F0] rounded-lg bg-white text-[#1E293B] hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="p-2 border border-[#E2E8F0] rounded-lg bg-white text-[#1E293B] hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {showDeleteAllModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
