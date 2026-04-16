@@ -68,7 +68,7 @@ export default function ProductList({ products, lastScannedId, onUpdate, onDelet
     XLSX.utils.book_append_sheet(wb, wsProducts, "Products");
 
     // Export File
-    XLSX.writeFile(wb, "InventoryFlow_Export.xlsx");
+    XLSX.writeFile(wb, "LeitorDeBarCode_Export.xlsx");
   };
 
   const startEditing = (product: Product) => {
